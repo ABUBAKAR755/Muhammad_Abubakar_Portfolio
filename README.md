@@ -8,7 +8,7 @@ Personal portfolio website of **Muhammad Abubakar**, AI Engineer building LLM-po
 - Dark, modern single-page portfolio
 - Animated neural-network hero, scroll reveals, live GitHub stats
 - Sections: About, Skills, Projects, Experience, Education, Services, Contact
-- Downloadable CV included (`assets/Muhammad-Abubakar-CV.pdf`)
+- Downloadable CV included (`cv.html` — print-friendly, save as PDF)
 
 ## Tech
 Plain HTML + CSS + JavaScript — no build step. Hosted free on GitHub Pages.
