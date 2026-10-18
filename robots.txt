@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abubakar755.github.io/Muhammad_Abubakar_Portfolio/sitemap.xml
