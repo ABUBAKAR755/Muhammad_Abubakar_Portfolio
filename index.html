@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Abubakar — AI Engineer | LLM & RAG Systems</title>
+<meta name="description" content="Muhammad Abubakar is an AI Engineer building LLM-powered agents, RAG pipelines and Python automation. Based in Pakistan, open to remote and on-site roles.">
+<meta property="og:title" content="Muhammad Abubakar — AI Engineer">
+<meta property="og:description" content="I build AI agents, RAG systems and data pipelines with Python, LangGraph and LangChain.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%23050810'/%3E%3Cpath d='M18 44 L32 16 L46 44 M24 34 h16' stroke='url(%23g)' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070f; --bg2:#0a0e1c; --card:#0c1224; --card2:#0e1530;
+  --line:rgba(148,163,184,.14);
+  --txt:#e8edf7; --muted:#93a0b8; --dim:#5b6578;
+  --cyan:#22d3ee; --violet:#8b5cf6; --green:#34d399; --amber:#fbbf24;
+  --grad:linear-gradient(120deg,#22d3ee,#8b5cf6);
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.65}
+::selection{background:rgba(139,92,246,.4)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:linear-gradient(#22d3ee,#8b5cf6);border-radius:8px}
+h1,h2,h3,.sg{font-family:'Space Grotesk',sans-serif}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+/* ---------- progress + cursor glow ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:9999;border-radius:0 4px 4px 0}
+#glow{position:fixed;left:50%;top:35%;width:520px;height:520px;border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(circle,rgba(139,92,246,.09),transparent 60%);transform:translate(-50%,-50%);transition:opacity .3s}
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);
+  background:rgba(5,7,15,.72);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Space Grotesk';font-weight:700;font-size:1.25rem;letter-spacing:.5px}
+.logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-links{display:flex;gap:28px;font-size:.92rem}
+.nav-links a{color:var(--muted);position:relative;transition:color .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--txt)}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--grad);transition:width .25s;border-radius:2px}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:999px;font-weight:600;font-size:.95rem;
+  background:var(--grad);color:#04060d;border:none;cursor:pointer;transition:transform .2s,box-shadow .25s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(139,92,246,.35)}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid rgba(148,163,184,.35)}
+.btn.ghost:hover{border-color:var(--cyan);box-shadow:0 8px 24px rgba(34,211,238,.18)}
+.btn.sm{padding:9px 18px;font-size:.85rem}
+#menuBtn{display:none;background:none;border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:8px 12px;font-size:1.1rem;cursor:pointer}
+/* ---------- hero ---------- */
+#home{position:relative;min-height:100vh;display:flex;align-items:center;padding:130px 0 70px;overflow:hidden}
+#net{position:absolute;inset:0;z-index:0;opacity:.9}
+.blob{position:absolute;border-radius:50%;filter:blur(110px);z-index:0;opacity:.5;animation:drift 14s ease-in-out infinite alternate}
+.b1{width:480px;height:480px;background:rgba(34,211,238,.16);top:-120px;left:-120px}
+.b2{width:520px;height:520px;background:rgba(139,92,246,.18);bottom:-160px;right:-140px;animation-delay:-6s}
+@keyframes drift{to{transform:translate(60px,40px) scale(1.12)}}
+.hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;width:100%}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border:1px solid rgba(52,211,153,.4);
+  border-radius:999px;font-size:.82rem;color:var(--green);background:rgba(52,211,153,.07);margin-bottom:22px}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.35;transform:scale(.8)}}
+.hero h1{font-size:clamp(2.6rem,5.6vw,4.3rem);line-height:1.08;font-weight:700;letter-spacing:-1px}
+.hero h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.typed-row{font-family:'JetBrains Mono',monospace;font-size:clamp(1rem,2.2vw,1.3rem);color:var(--cyan);margin:18px 0 8px;min-height:2em}
+.typed-row .caret{display:inline-block;width:10px;height:1.2em;background:var(--cyan);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p.sub{color:var(--muted);max-width:520px;font-size:1.05rem;margin:14px 0 30px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.socials{display:flex;gap:12px}
+.soc{width:46px;height:46px;display:grid;place-items:center;border:1px solid var(--line);border-radius:14px;
+  color:var(--muted);transition:all .25s;background:rgba(255,255,255,.02)}
+.soc:hover{color:#04060d;background:var(--grad);border-color:transparent;transform:translateY(-3px)}
+.soc svg{width:20px;height:20px}
+.photo-wrap{position:relative;justify-self:center}
+.photo{width:min(340px,72vw);aspect-ratio:4/5;object-fit:cover;border-radius:26px;position:relative;z-index:2;
+  border:1px solid rgba(148,163,184,.25);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.ring{position:absolute;inset:-16px;border-radius:34px;z-index:1;
+  background:conic-gradient(from 120deg,#22d3ee,#8b5cf6,#22d3ee);filter:blur(2px);opacity:.55;animation:spin 7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.photo-card{position:absolute;z-index:3;background:rgba(12,18,36,.92);border:1px solid var(--line);border-radius:14px;
+  padding:10px 16px;font-size:.82rem;backdrop-filter:blur(8px);box-shadow:0 14px 40px rgba(0,0,0,.45);display:flex;gap:10px;align-items:center}
+.pc1{top:8%;left:-72px;animation:float 5s ease-in-out infinite}
+.pc2{bottom:10%;right:-58px;animation:float 6s ease-in-out infinite reverse}
+@keyframes float{50%{transform:translateY(-10px)}}
+.photo-card .e{font-size:1.3rem}
+/* ---------- stats ---------- */
+.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(10,14,28,.6)}
+.stats-in{display:grid;grid-template-columns:repeat(4,1fr);padding:34px 24px;gap:20px}
+.stat{text-align:center}
+.stat .n{font-family:'Space Grotesk';font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .l{color:var(--muted);font-size:.88rem;margin-top:4px}
+/* ---------- sections ---------- */
+section{padding:96px 0;position:relative}
+.kicker{font-family:'JetBrains Mono';color:var(--cyan);font-size:.85rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+h2.title{font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.5px;margin-bottom:14px}
+.sub2{color:var(--muted);max-width:640px;margin-bottom:48px}
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+/* ---------- marquee ---------- */
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);padding:18px 0}
+.mq-track{display:flex;gap:44px;width:max-content;animation:mq 26s linear infinite;font-family:'Space Grotesk';font-size:1.02rem;color:var(--muted);white-space:nowrap}
+.mq-track span b{color:var(--cyan);font-weight:600}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.about-photo{width:100%;border-radius:var(--radius);border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.about-txt p{color:var(--muted);margin-bottom:16px}
+.about-txt p b{color:var(--txt)}
+.hl{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.hl div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:.9rem}
+.hl div .e{font-size:1.35rem;display:block;margin-bottom:6px}
+.hl div b{display:block;font-family:'Space Grotesk';margin-bottom:2px}
+.hl div span{color:var(--muted);font-size:.84rem}
+/* ---------- skills ---------- */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:18px}
+.skill-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;overflow:hidden}
+.skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);opacity:0;transition:opacity .25s}
+.skill-card:hover{transform:translateY(-6px);border-color:rgba(139,92,246,.5);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.skill-card:hover::before{opacity:1}
+.skill-card .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:1.5rem;margin-bottom:16px;
+  background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25)}
+.skill-card h3{font-size:1.05rem;margin-bottom:12px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:.78rem;padding:6px 12px;border-radius:999px;background:rgba(148,163,184,.09);border:1px solid var(--line);color:var(--muted);transition:all .2s}
+.tag:hover{color:var(--txt);border-color:var(--cyan)}
+/* ---------- projects ---------- */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column}
+.proj:hover{transform:translateY(-8px);border-color:rgba(34,211,238,.45);box-shadow:0 26px 60px rgba(0,0,0,.5)}
+.proj-vis{height:170px;position:relative;display:grid;place-items:center;overflow:hidden}
+.proj-vis .big{font-size:3.4rem;filter:drop-shadow(0 8px 20px rgba(0,0,0,.5));transition:transform .35s}
+.proj:hover .big{transform:scale(1.18) rotate(-4deg)}
+.proj-vis::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 120%,rgba(0,0,0,.45),transparent 60%)}
+.pv1{background:linear-gradient(135deg,#0e2a3a,#123)}
+.pv2{background:linear-gradient(135deg,#241b3d,#1a1030)}
+.pv3{background:linear-gradient(135deg,#0f2e25,#0c1f2a)}
+.pv4{background:linear-gradient(135deg,#2c1a2e,#1c1226)}
+.pv5{background:linear-gradient(135deg,#1c2440,#101a33)}
+.pv6{background:linear-gradient(135deg,#2a2410,#1d1a10)}
+.proj-body{padding:24px;display:flex;flex-direction:column;flex:1}
+.proj-body h3{font-size:1.15rem;margin-bottom:8px}
+.proj-body p{color:var(--muted);font-size:.92rem;flex:1;margin-bottom:16px}
+.proj-meta{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.lang{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--muted);font-family:'JetBrains Mono'}
+.lang i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.gh-link{display:inline-flex;align-items:center;gap:7px;font-size:.86rem;font-weight:600;color:var(--cyan)}
+.gh-link:hover{text-decoration:underline}
+.gh-link svg{width:16px;height:16px}
+/* ---------- timeline ---------- */
+.tl{position:relative;max-width:760px;margin:0 auto;padding-left:34px}
+.tl::before{content:'';position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(#22d3ee,#8b5cf6);border-radius:2px;opacity:.6}
+.tl-item{position:relative;margin-bottom:38px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px}
+.tl-item::before{content:'';position:absolute;left:-31px;top:30px;width:14px;height:14px;border-radius:50%;
+  background:var(--bg);border:3px solid var(--cyan);box-shadow:0 0 14px rgba(34,211,238,.7)}
+.tl-item .when{font-family:'JetBrains Mono';font-size:.8rem;color:var(--cyan);margin-bottom:6px}
+.tl-item h3{font-size:1.2rem}
+.tl-item .co{color:var(--violet);font-weight:600;font-size:.95rem;margin-bottom:12px}
+.tl-item ul{list-style:none}
+.tl-item li{color:var(--muted);font-size:.93rem;margin-bottom:8px;padding-left:22px;position:relative}
+.tl-item li::before{content:'▸';position:absolute;left:0;color:var(--cyan)}
+/* ---------- edu ---------- */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.edu{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;display:flex;gap:20px;transition:transform .25s,border-color .25s}
+.edu:hover{transform:translateY(-5px);border-color:rgba(139,92,246,.5)}
+.edu .ic{flex:none;width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;
+  background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3)}
+.edu h3{font-size:1.08rem;margin-bottom:4px}
+.edu .org{color:var(--violet);font-weight:600;font-size:.92rem}
+.edu .det{color:var(--muted);font-size:.87rem;margin-top:8px}
+/* ---------- services ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.svc{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;transition:transform .25s}
+.svc:hover{transform:translateY(-6px)}
+.svc .n{font-family:'JetBrains Mono';color:var(--cyan);font-size:.85rem;margin-bottom:14px}
+.svc h3{font-size:1.25rem;margin-bottom:12px}
+.svc p{color:var(--muted);font-size:.93rem}
+/* ---------- contact ---------- */
+#contact .box{background:linear-gradient(150deg,#0d1430,#0a0f22);border:1px solid rgba(139,92,246,.3);border-radius:26px;
+  padding:clamp(36px,6vw,70px);text-align:center;position:relative;overflow:hidden}
+#contact .box::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:520px;height:260px;
+  background:radial-gradient(ellipse,rgba(139,92,246,.28),transparent 65%)}
+.c-rows{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:30px 0;position:relative;z-index:2}
+.c-item{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.03);border:1px solid var(--line);
+  border-radius:14px;padding:12px 20px;font-size:.92rem;transition:border-color .25s}
+.c-item:hover{border-color:var(--cyan)}
+.c-item .e{font-size:1.15rem}
+form.cta-form{max-width:560px;margin:0 auto;position:relative;z-index:2;display:grid;gap:14px}
+.cta-form input,.cta-form textarea{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;
+  padding:14px 18px;color:var(--txt);font-family:'Inter';font-size:.95rem;width:100%;outline:none;transition:border-color .2s}
+.cta-form input:focus,.cta-form textarea:focus{border-color:var(--cyan)}
+.cta-form textarea{min-height:120px;resize:vertical}
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:.88rem}
+footer .sg{font-size:1.05rem;color:var(--txt);margin-bottom:8px}
+#top{position:fixed;bottom:26px;right:26px;width:48px;height:48px;border-radius:50%;background:var(--grad);color:#04060d;
+  display:grid;place-items:center;font-size:1.2rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:99;border:none}
+#top.show{opacity:1;pointer-events:auto}
+/* ---------- responsive ---------- */
+@media(max-width:920px){
+  .hero-in{grid-template-columns:1fr;text-align:center;gap:70px}
+  .hero p.sub{margin-left:auto;margin-right:auto}
+  .hero-cta,.socials{justify-content:center}
+  .pc1{left:-8px}.pc2{right:-8px}
+  .about-grid{grid-template-columns:1fr}
+  .nav-links{position:fixed;top:64px;right:0;left:0;flex-direction:column;background:rgba(5,7,15,.97);padding:26px;
+    gap:20px;text-align:center;border-bottom:1px solid var(--line);display:none}
+  .nav-links.open{display:flex}
+  #menuBtn{display:block}
+  .stats-in{grid-template-columns:repeat(2,1fr)}
+  section{padding:70px 0}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="glow"></div>
+
+<nav>
+  <div class="nav-in">
+    <a href="#home" class="logo">MA<b>.</b></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a href="assets/Muhammad-Abubakar-CV.pdf" download class="btn sm">Download CV</a>
+      <button id="menuBtn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header id="home" class="hero">
+  <canvas id="net"></canvas>
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="wrap hero-in">
+    <div>
+      <span class="pill"><span class="dot"></span> Open to work — Remote & On-site</span>
+      <h1>Hi, I'm <span class="grad">Muhammad<br>Abubakar</span></h1>
+      <div class="typed-row"><span id="typed"></span><span class="caret"></span></div>
+      <p class="sub">I build LLM-powered AI agents, RAG pipelines and Python automation that turn messy real-world data into working products — from prototype to production with LangGraph, LangChain, FastAPI and Docker.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn">View My Work →</a>
+        <a href="#contact" class="btn ghost">Let's Talk</a>
+      </div>
+      <div class="socials">
+        <a class="soc" href="https://github.com/ABUBAKAR755" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></a>
+        <a class="soc" href="https://www.linkedin.com/in/abubakar755/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+        <a class="soc" href="mailto:m.abubaakar755@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 7 9-7"/></svg></a>
+        <a class="soc" href="https://www.fiverr.com/muh_abubakar169" target="_blank" rel="noopener" aria-label="Fiverr"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm4.6 13.4a.6.6 0 0 1-.6.6H8.2a.6.6 0 0 1-.6-.6v-1.2h2.4V9.6H7.6V8.4a.6.6 0 0 1 .6-.6h7.2a.6.6 0 0 1 .6.6v7z"/></svg></a>
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <div class="ring"></div>
+      <img class="photo" src="assets/photo.jpg" alt="Muhammad Abubakar — AI Engineer">
+      <div class="photo-card pc1"><span class="e">🤖</span><span><b>AI Engineer</b><br><span style="color:var(--muted)">LLM · RAG · Agents</span></span></div>
+      <div class="photo-card pc2"><span class="e">🐍</span><span><b>Python Developer</b><br><span style="color:var(--muted)">FastAPI · Docker</span></span></div>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stats-in">
+    <div class="stat rv"><div class="n" data-count="75" data-suffix="+">0</div><div class="l">AI agents built & deployed</div></div>
+    <div class="stat rv"><div class="n" data-count="1" data-suffix="M+">0</div><div class="l">Data points processed daily</div></div>
+    <div class="stat rv"><div class="n" data-count="10" data-suffix="+">0</div><div class="l">Govt departments served</div></div>
+    <div class="stat rv"><div class="n" data-count="39" data-suffix="">0</div><div class="l">Public GitHub repositories</div></div>
+  </div>
+</div>
+
+<div class="marquee"><div class="mq-track" id="mqTrack"></div></div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="kicker rv">// about me</div>
+    <h2 class="title rv">Turning ideas into intelligent systems</h2>
+    <div class="about-grid" style="margin-top:36px">
+      <img class="about-photo rv" src="assets/photo.jpg" alt="Muhammad Abubakar">
+      <div class="about-txt rv">
+        <p>I'm <b>Muhammad Abubakar</b>, an <b>AI Engineer</b> from Swabi, Pakistan, currently building production AI systems at <b>SAT Software House</b>. My work lives at the intersection of large language models and real-world data — I design <b>multi-agent workflows</b>, <b>RAG pipelines</b> and <b>automated ETL systems</b> that actually ship.</p>
+        <p>Previously at <b>ProspectROI AI</b>, I architected 75+ autonomous AI agents with LangGraph and built sales-automation platforms on GPT-4 and Claude. I love taking AI features from a rough prototype to a Dockerized production service.</p>
+        <p>I'm currently open to <b>AI Engineer</b>, <b>Python Developer</b> and <b>Generative AI</b> roles — in Islamabad, Lahore, or remote.</p>
+        <div class="hl">
+          <div><span class="e">🎓</span><b>BS Computer Science</b><span>UET Mardan, 2025</span></div>
+          <div><span class="e">🏅</span><b>ML Certified</b><span>Machine Learning A–Z, Udemy</span></div>
+          <div><span class="e">💼</span><b>2 Roles Shipped</b><span>SAT Software House · ProspectROI AI</span></div>
+          <div><span class="e">🌍</span><b>Open to Relocate</b><span>Islamabad · Lahore · Remote</span></div>
+        </div>
+        <div style="margin-top:26px;display:flex;gap:14px;flex-wrap:wrap">
+          <img src="https://github-readme-stats.vercel.app/api?username=ABUBAKAR755&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0c1224&title_color=22d3ee&icon_color=8b5cf6" alt="Muhammad Abubakar's GitHub stats" style="border-radius:14px;border:1px solid var(--line);max-width:100%" loading="lazy">
+          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ABUBAKAR755&layout=compact&theme=tokyonight&hide_border=true&bg_color=0c1224&title_color=22d3ee" alt="Most used languages" style="border-radius:14px;border:1px solid var(--line);max-width:100%" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="kicker rv">// tech stack</div>
+    <h2 class="title rv">What I work with</h2>
+    <p class="sub2 rv">The tools I reach for when building AI products end to end.</p>
+    <div class="skills-grid">
+      <div class="skill-card rv"><div class="ic">🐍</div><h3>Languages & Backend</h3><div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">REST APIs</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">TypeScript</span></div></div>
+      <div class="skill-card rv"><div class="ic">🧠</div><h3>AI & LLM Systems</h3><div class="tags"><span class="tag">LangGraph</span><span class="tag">LangChain</span><span class="tag">RAG</span><span class="tag">Vector Search</span><span class="tag">OpenAI API</span><span class="tag">Anthropic Claude</span><span class="tag">Multi-Agent Orchestration</span></div></div>
+      <div class="skill-card rv"><div class="ic">📊</div><h3>Machine Learning</h3><div class="tags"><span class="tag">Scikit-learn</span><span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Deep Learning</span><span class="tag">Computer Vision</span><span class="tag">NLP</span></div></div>
+      <div class="skill-card rv"><div class="ic">⚙️</div><h3>Data & Automation</h3><div class="tags"><span class="tag">Web Scraping</span><span class="tag">Apify</span><span class="tag">ETL Workflows</span><span class="tag">n8n</span><span class="tag">Google Maps API</span><span class="tag">Pandas</span></div></div>
+      <div class="skill-card rv"><div class="ic">🛠️</div><h3>Engineering Tools</h3><div class="tags"><span class="tag">Docker</span><span class="tag">Git & GitHub</span><span class="tag">Next.js</span><span class="tag">Tailwind CSS</span><span class="tag">Linux</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="kicker rv">// selected work</div>
+    <h2 class="title rv">Projects from my GitHub</h2>
+    <p class="sub2 rv">A few things I've built — AI systems, agents, and full-stack apps. All open source.</p>
+    <div class="proj-grid">
+
+      <article class="proj rv">
+        <div class="proj-vis pv1"><span class="big">🤖</span></div>
+        <div class="proj-body">
+          <h3>Support Reply Assistant</h3>
+          <p>AI technical assessment project: an intelligent support-reply assistant built with React, TypeScript, Node.js, SQLite and Anthropic Claude — generating contextual replies for support teams.</p>
+          <div class="tags" style="margin-bottom:16px"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Claude</span><span class="tag">Node.js</span></div>
+          <div class="proj-meta"><span class="lang"><i style="background:#3178c6"></i>TypeScript</span><a class="gh-link" href="https://github.com/ABUBAKAR755/dafinitiq-support-reply-assistant" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>View on GitHub</a></div>
+        </div>
+      </article>
+
+      <article class="proj rv">
+        <div class="proj-vis pv2"><span class="big">🚀</span></div>
+        <div class="proj-body">
+          <h3>NexaBoost Agency Website</h3>
+          <p>Responsive digital-agency website built with Next.js 15, TypeScript, Tailwind CSS and Framer Motion — smooth animations, modern sections, fully responsive.</p>
+          <div class="tags" style="margin-bottom:16px"><span class="tag">Next.js 15</span><span class="tag">TypeScript</span><span class="tag">Tailwind</span><span class="tag">Framer Motion</span></div>
+          <div class="proj-meta"><span class="lang"><i style="background:#3178c6"></i>TypeScript</span><a class="gh-link" href="https://github.com/ABUBAKAR755/NexaBoost-Website" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>View on GitHub</a></div>
+        </div>
+      </article>
+
+      <article class="proj rv">
+        <div class="proj-vis pv3"><span class="big">🧩</span></div>
+        <div class="proj-body">
+          <h3>LLM Sales Agent</h3>
+          <p>Multi-agent LangGraph workflow for lead qualification and outreach across CRM, email and chat channels — task decomposition with LangChain, FastAPI, GPT-4 and Claude.</p>
+          <div class="tags" style="margin-bottom:16px"><span class="tag">Python</span><span class="tag">LangGraph</span><span class="tag">LangChain</span><span class="tag">GPT-4</span></div>
+          <div class="proj-meta"><span class="lang"><i style="background:#3572A5"></i>Python</span><a class="gh-link" href="https://github.com/ABUBAKAR755/support-reply-assistant" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>View on GitHub</a></div>
+        </div>
+      </article>
+
+      <article class="proj rv">
+        <div class="proj-vis pv4"><span class="big">🎨</span></div>
+        <div class="proj-body">
+          <h3>AI Image Generator</h3>
+          <p>Web app that turns text prompts into images using generative AI — clean UI, prompt handling and image rendering, built with JavaScript.</p>
+          <div class="tags" style="margin-bottom:16px"><span class="tag">JavaScript</span><span class="tag">Generative AI</span><span class="tag">Web App</span></div>
+          <div class="proj-meta"><span class="lang"><i style="background:#f1e05a"></i>JavaScript</span><a class="gh-link" href="https://github.com/ABUBAKAR755/Ai-Image-Generator" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>View on GitHub</a></div>
+        </div>
+      </article>
+
+      <article class="proj rv">
+        <div class="proj-vis pv5"><span class="big">🎙️</span></div>
+        <div class="proj-body">
+          <h3>VoiceFlow — Speak to Code</h3>
+          <p>Python voice assistant that converts spoken instructions into code — experimenting with speech recognition and NLP to make coding hands-free.</p>
+          <div class="tags" style="margin-bottom:16px"><span class="tag">Python</span><span class="tag">Speech Recognition</span><span class="tag">NLP</span></div>
+          <div class="proj-meta"><span class="lang"><i style="background:#3572A5"></i>Python</span><a class="gh-link" href="https://github.com/ABUBAKAR755/VoiceFlow---Speak-to-Code-" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>View on GitHub</a></div>
+        </div>
+      </article>
+
+      <article class="proj rv">
+        <div class="proj-vis pv6"><span class="big">🕸️</span></div>
+        <div class="proj-body">
+          <h3>Web Scraper Toolkit</h3>
+          <p>Python web-scraping projects for automated data extraction — request handling, parsing and structured data collection pipelines.</p>
+          <div class="tags" style="margin-bottom:16px"><span class="tag">Python</span><span class="tag">Web Scraping</span><span class="tag">Data Pipelines</span></div>
+          <div class="proj-meta"><span class="lang"><i style="background:#3572A5"></i>Python</span><a class="gh-link" href="https://github.com/ABUBAKAR755/Web-Scraper" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>View on GitHub</a></div>
+        </div>
+      </article>
+
+    </div>
+    <div style="text-align:center;margin-top:44px" class="rv">
+      <a href="https://github.com/ABUBAKAR755?tab=repositories" target="_blank" rel="noopener" class="btn ghost">See all 39 repositories on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<section id="experience" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="kicker rv">// career</div>
+    <h2 class="title rv">Where I've worked</h2>
+    <p class="sub2 rv">Production experience building AI systems and data pipelines.</p>
+    <div class="tl">
+      <div class="tl-item rv">
+        <div class="when">Dec 2025 — Present</div>
+        <h3>AI Engineer</h3>
+        <div class="co">SAT Software House (PSEB)</div>
+        <ul>
+          <li>Engineer data scraping & processing pipelines across 10+ government departments with Python, Apify and the Google Maps API.</li>
+          <li>Build automated ETL workflows that clean, structure, transform and validate business-intelligence data.</li>
+          <li>Design AI automation with LLMs, RAG pipelines and vector search, served by scalable FastAPI services on Docker.</li>
+        </ul>
+      </div>
+      <div class="tl-item rv">
+        <div class="when">Sep 2025 — Nov 2025</div>
+        <h3>AI Developer</h3>
+        <div class="co">ProspectROI AI</div>
+        <ul>
+          <li>Architected and deployed 75+ autonomous AI agents with LangGraph & LangChain, including multi-agent orchestration.</li>
+          <li>Built AI-driven sales automation reported to improve lead conversion by 40%, integrating GPT-4 and Claude.</li>
+          <li>Engineered web-mining systems processing 1M+ data points daily plus end-to-end ML pipelines.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="kicker rv">// credentials</div>
+    <h2 class="title rv">Education & Certifications</h2>
+    <p class="sub2 rv">The foundations behind the work.</p>
+    <div class="edu-grid">
+      <div class="edu rv">
+        <div class="ic">🎓</div>
+        <div><h3>BS Computer Science</h3><div class="org">University of Engineering & Technology, Mardan</div>
+        <div class="det">Completed July 2025 · 16-year degree program · HEC-attested</div></div>
+      </div>
+      <div class="edu rv">
+        <div class="ic">🏅</div>
+        <div><h3>Machine Learning A–Z</h3><div class="org">Udemy</div>
+        <div class="det">Completed July 2025 · Hands-on ML: regression, classification, clustering, NLP & deep learning</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="kicker rv">// services</div>
+    <h2 class="title rv">What I can build for you</h2>
+    <p class="sub2 rv">Freelance and full-time — I take AI ideas from sketch to shipped.</p>
+    <div class="svc-grid">
+      <div class="svc rv"><div class="n">01</div><h3>AI Agents & LLM Apps</h3><p>Custom AI agents with LangGraph/LangChain — support assistants, sales automation, multi-agent workflows powered by GPT-4 and Claude.</p></div>
+      <div class="svc rv"><div class="n">02</div><h3>RAG Pipelines & Chatbots</h3><p>Retrieval-augmented generation over your documents with vector search — accurate, grounded answers from your own data.</p></div>
+      <div class="svc rv"><div class="n">03</div><h3>Data Pipelines & Automation</h3><p>Web scraping, ETL workflows and n8n automations that collect, clean and deliver data daily — hands-free.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="box rv">
+      <div class="kicker" style="text-align:center">// get in touch</div>
+      <h2 class="title" style="text-align:center">Let's build something intelligent</h2>
+      <p class="sub2" style="text-align:center;margin-left:auto;margin-right:auto;position:relative;z-index:2">Have a role, a project, or just want to talk AI? My inbox is always open.</p>
+      <div class="c-rows">
+        <a class="c-item" href="mailto:m.abubaakar755@gmail.com"><span class="e">✉️</span>m.abubaakar755@gmail.com</a>
+        <a class="c-item" href="tel:+923405058254"><span class="e">📞</span>+92 340 5058254</a>
+        <span class="c-item"><span class="e">📍</span>Swabi, Pakistan · Open to relocate</span>
+      </div>
+      <form class="cta-form" id="contactForm">
+        <input type="text" id="cfName" placeholder="Your name" required>
+        <input type="email" id="cfEmail" placeholder="Your email" required>
+        <textarea id="cfMsg" placeholder="Tell me about your project or role..." required></textarea>
+        <button type="submit" class="btn" style="justify-content:center">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="sg">Muhammad Abubakar</div>
+    <div>AI Engineer · Python Developer · LLM & RAG Systems</div>
+    <div style="margin-top:10px">© 2026 Muhammad Abubakar · Built with passion in Pakistan 🇵🇰</div>
+  </div>
+</footer>
+
+<button id="top" aria-label="Back to top">↑</button>
+<script>
+/* ---------- neural network canvas ---------- */
+(function(){
+  const c=document.getElementById('net'),x=c.getContext('2d');
+  let W,H,nodes=[],mouse={x:-999,y:-999};
+  function size(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;
+    const n=Math.min(90,Math.floor(W*H/16000));
+    nodes=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.8+.8}));
+  }
+  size();addEventListener('resize',size);
+  c.parentElement.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
+  c.parentElement.addEventListener('mouseleave',()=>{mouse.x=-999;mouse.y=-999;});
+  (function tick(){
+    x.clearRect(0,0,W,H);
+    for(const p of nodes){
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+      const dm=Math.hypot(p.x-mouse.x,p.y-mouse.y);
+      if(dm<160){p.x+=(p.x-mouse.x)/dm*.6;p.y+=(p.y-mouse.y)/dm*.6;}
+    }
+    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i],b=nodes[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<150){x.strokeStyle=`rgba(103,120,220,${(1-d/150)*.28})`;x.lineWidth=1;
+        x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}
+    }
+    for(const p of nodes){
+      const g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,6);
+      g.addColorStop(0,'rgba(34,211,238,.9)');g.addColorStop(1,'rgba(139,92,246,0)');
+      x.fillStyle=g;x.beginPath();x.arc(p.x,p.y,5,0,7);x.fill();
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ---------- typing effect ---------- */
+(function(){
+  const roles=['AI Engineer','LLM Systems Builder','Python Developer','RAG Specialist','Automation Expert'];
+  const el=document.getElementById('typed');let ri=0,ci=0,del=false;
+  (function type(){
+    const word=roles[ri];
+    el.textContent=word.slice(0,ci);
+    let t=del?40:85;
+    if(!del&&ci===word.length){t=1600;del=true;}
+    else if(del&&ci===0){del=false;ri=(ri+1)%roles.length;t=400;}
+    ci+=del?-1:1;
+    setTimeout(type,t);
+  })();
+})();
+
+/* ---------- skill marquee ---------- */
+(function(){
+  const skills=['Python','LangGraph','LangChain','RAG','FastAPI','Docker','OpenAI API','Claude','Vector Search','Web Scraping','n8n','PostgreSQL','PyTorch','Next.js','ETL Pipelines'];
+  const half=skills.map(s=>`<span>✦ <b>${s}</b></span>`).join('');
+  document.getElementById('mqTrack').innerHTML=half+half;
+})();
+
+/* ---------- scroll reveal ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ---------- animated counters ---------- */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;cio.unobserve(e.target);
+  const el=e.target,end=+el.dataset.count,suf=el.dataset.suffix||'',t0=performance.now(),dur=1600;
+  (function step(t){const p=Math.min(1,(t-t0)/dur),v=Math.floor(end*(1-Math.pow(1-p,3)));
+    el.textContent=v+suf;if(p<1)requestAnimationFrame(step);})(t0);
+}),{threshold:.5});
+document.querySelectorAll('.stat .n').forEach(el=>cio.observe(el));
+
+/* ---------- nav / progress / top ---------- */
+const links=[...document.querySelectorAll('.nav-links a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+addEventListener('scroll',()=>{
+  const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+  document.getElementById('progress').style.width=(y/h*100)+'%';
+  document.getElementById('top').classList.toggle('show',y>600);
+  let cur=0;secs.forEach((s,i)=>{if(s&&y>=s.offsetTop-140)cur=i;});
+  links.forEach((a,i)=>a.classList.toggle('active',i===cur));
+},{passive:true});
+document.getElementById('top').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+document.getElementById('menuBtn').onclick=()=>document.getElementById('navLinks').classList.toggle('open');
+document.querySelectorAll('.nav-links a').forEach(a=>a.onclick=()=>document.getElementById('navLinks').classList.remove('open'));
+
+/* ---------- cursor glow ---------- */
+const glow=document.getElementById('glow');
+addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';},{passive:true});
+
+/* ---------- contact form -> email ---------- */
+document.getElementById('contactForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=document.getElementById('cfName').value.trim(),
+        m=document.getElementById('cfEmail').value.trim(),
+        b=document.getElementById('cfMsg').value.trim();
+  location.href=`mailto:m.abubaakar755@gmail.com?subject=${encodeURIComponent('Portfolio contact from '+n)}&body=${encodeURIComponent(b+'\n\n— '+n+' ('+m+')')}`;
+});
+</script>
+</body>
+</html>
